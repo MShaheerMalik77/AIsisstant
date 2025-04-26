@@ -23,7 +23,8 @@ class TaskInputActivity : AppCompatActivity() {
         val resultView = findViewById<TextView>(R.id.parsedTaskResult)
 
         // Initialize Firebase Database and Auth
-        database = FirebaseDatabase.getInstance().reference
+        database = FirebaseDatabase.getInstance("https://aisisstant-default-rtdb.firebaseio.com/").reference
+
         auth = FirebaseAuth.getInstance()
 
         saveBtn.setOnClickListener {
