@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/moodLogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Your Mood"
+        android:textSize="20sp"
+        android:layout_marginBottom="16dp"/>
+
+    <RadioGroup
+        android:id="@+id/moodRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="32dp">
+
+        <RadioButton
+            android:id="@+id/radioHappy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Happy" />
+
+        <RadioButton
+            android:id="@+id/radioStressed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stressed" />
+
+        <RadioButton
+            android:id="@+id/radioSad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sad" />
+
+        <RadioButton
+            android:id="@+id/radioTired"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tired" />
+
+        <RadioButton
+            android:id="@+id/radioNeutral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Neutral" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/submitMoodButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Mood"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="12dp"/>
+</LinearLayout>
