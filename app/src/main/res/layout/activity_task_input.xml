@@ -3,25 +3,31 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
 
     <EditText
         android:id="@+id/taskInput"
         android:hint="e.g. Submit assignment on Monday"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:minHeight="60dp"
+        android:background="@android:drawable/edit_text"
+        android:padding="12dp"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/saveTaskButton"
-        android:text="Parse Task"
+        android:text="➕ Add Task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:id="@+id/parsedTaskResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:paddingTop="16dp"/>
+        android:textColor="#444444"
+        android:paddingTop="24dp" />
 </LinearLayout>

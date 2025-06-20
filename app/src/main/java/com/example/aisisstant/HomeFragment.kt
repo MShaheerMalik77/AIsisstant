@@ -1,79 +1,82 @@
+package com.example.aisisstant
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.aisisstant.TaskInputActivity
-import com.example.aisisstant.MoodLogActivity
-import com.example.aisisstant.VoiceTaskActivity
-import com.example.aisisstant.ChecklistActivity
-import com.example.aisisstant.SummarizerActivity
-import com.example.aisisstant.LoginActivity
+import androidx.fragment.app.viewModels
+import com.example.aisisstant.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
-
-
-import com.example.aisisstant.R
 
 class HomeFragment : Fragment() {
 
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: HomeViewModel by viewModels()
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mood = getUserMood()
+        viewModel.loadMood()
 
-        view.findViewById<TextView>(R.id.taskSummary).text = "📋 Tasks: 5 Today"
-        view.findViewById<TextView>(R.id.moodStatus).text = "😊 Mood: $mood"
-        view.findViewById<TextView>(R.id.reminderNote).text = "🔔 2 Reminders set"
-        view.findViewById<TextView>(R.id.moodSuggestion).text = getSuggestionForMood(mood)
+        // Observe LiveData
+        viewModel.mood.observe(viewLifecycleOwner) { mood ->
+            binding.moodStatus.text = "😊 Mood: ${mood ?: "Not set"}"
+        }
 
-        view.findViewById<Button>(R.id.addTaskButton).setOnClickListener {
+        viewModel.suggestion.observe(viewLifecycleOwner) { suggestion ->
+            binding.moodSuggestion.text = suggestion
+        }
+
+        binding.taskSummary.text = "📋 Tasks: ${viewModel.getSmartCategorizedTasks().size} Today"
+        binding.reminderNote.text = "🔔 ${viewModel.getActiveReminders().size} Reminders set"
+        binding.progressStatus.text = "📊 Task Streak: ${viewModel.getUserProgress()} days"
+
+        // Button actions
+        binding.addTaskButton.setOnClickListener {
             startActivity(Intent(requireContext(), TaskInputActivity::class.java))
         }
-        view.findViewById<Button>(R.id.logMoodButton).setOnClickListener {
+
+        binding.logMoodButton.setOnClickListener {
             startActivity(Intent(requireContext(), MoodLogActivity::class.java))
         }
-        view.findViewById<Button>(R.id.voiceInputButton).setOnClickListener {
+
+        binding.voiceInputButton.setOnClickListener {
             startActivity(Intent(requireContext(), VoiceTaskActivity::class.java))
         }
-        view.findViewById<Button>(R.id.summarizerButton).setOnClickListener {
+
+        binding.summarizerButton.setOnClickListener {
             startActivity(Intent(requireContext(), SummarizerActivity::class.java))
         }
-        view.findViewById<Button>(R.id.checklistButton).setOnClickListener {
+
+        binding.checklistButton.setOnClickListener {
             startActivity(Intent(requireContext(), ChecklistActivity::class.java))
         }
-        view.findViewById<Button>(R.id.logoutButton).setOnClickListener {
+
+        binding.logoutButton.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            startActivity(Intent(requireContext(), LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            })
         }
     }
 
-
-    private fun getUserMood(): String {
-        return "Stressed" // Later, fetch from mood logging feature
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
-    private fun getSuggestionForMood(mood: String): String {
-        return when (mood.lowercase()) {
-            "happy" -> "You're in a good mood! Great time to tackle hard tasks."
-            "stressed" -> "Take a breather. Focus on light or essential tasks."
-            "sad" -> "Consider journaling or doing something you enjoy."
-            "tired" -> "Prioritize rest. Reschedule less urgent tasks."
-            else -> "Set your mood to get personalized suggestions."
-        }
+    companion object {
+        const val FIREBASE_URL = "https://aisisstant-default-rtdb.asia-southeast1.firebasedatabase.app/"
     }
 }
-
-
-

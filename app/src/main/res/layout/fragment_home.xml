@@ -49,19 +49,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!-- 📈 Personal Progress Tracker -->
+        <TextView
+            android:id="@+id/progressStatus"
+            android:text="📊 Task Streak: -- days"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ProgressBar
+            android:id="@+id/taskProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="50"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressTint="#4CAF50"/>
+
+        <!-- ACTION BUTTONS -->
+
         <Button
             android:id="@+id/addTaskButton"
-            android:text="Add New Task"
+            android:text="➕ Add New Task"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"/>
 
         <Button
             android:id="@+id/logMoodButton"
-            android:text="Log Mood"
+            android:text="🧠 Log Mood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"/>
+
         <Button
             android:id="@+id/voiceInputButton"
             android:text="🎤 Voice Input"
@@ -83,11 +107,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"/>
 
+        <!-- Logout -->
         <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout" />
+            android:id="@+id/logoutButton"
+            android:text="🚪 Logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"/>
 
     </LinearLayout>
 </ScrollView>

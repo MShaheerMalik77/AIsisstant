@@ -7,7 +7,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 // Import all your activities so navigation will be smooth
 import com.example.aisisstant.CalendarActivity
-import com.example.aisisstant.ChecklistGenerator
 import com.example.aisisstant.DashBoardActivity  // <-- CAREFUL! Name is DashBoardActivity based on your file list
 import com.example.aisisstant.LoginActivity
 import com.example.aisisstant.MoodLogActivity
