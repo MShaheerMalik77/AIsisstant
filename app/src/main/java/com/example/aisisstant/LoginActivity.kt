@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().reference // <-- initialize database
+        database = FirebaseDatabase.getInstance().reference
 
         val email = findViewById<EditText>(R.id.emailInput)
         val password = findViewById<EditText>(R.id.passwordInput)
@@ -34,7 +34,6 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val userId = auth.currentUser?.uid
                         if (userId != null) {
-                            // Save user info to database
                             val userMap = mapOf(
                                 "email" to emailStr
                             )

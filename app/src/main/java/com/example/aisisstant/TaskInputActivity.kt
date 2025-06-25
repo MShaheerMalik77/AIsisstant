@@ -41,7 +41,13 @@ class TaskInputActivity : AppCompatActivity() {
             val parsedTask = ONNXTaskParser.parse(this, rawText)
 
             // Display result immediately
-            resultView.text = "📌 Title: ${parsedTask.title}\n📅 Date: ${parsedTask.date}\n📂 Category: ${parsedTask.category}"
+            resultView.text = """
+    📌 Title: ${parsedTask.title}
+    📅 Date: ${parsedTask.date}
+    🔁 Recurs: ${parsedTask.recurrence}
+    📂 Category: ${parsedTask.category}
+""".trimIndent()
+
 
             val currentUser = auth.currentUser
             if (currentUser != null) {

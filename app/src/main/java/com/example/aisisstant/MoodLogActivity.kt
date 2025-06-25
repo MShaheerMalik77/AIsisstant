@@ -21,15 +21,12 @@ class MoodLogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mood_log)
 
-        // Initialize Firebase
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance("https://aisisstant-default-rtdb.asia-southeast1.firebasedatabase.app/").reference
 
-        // Initialize UI components
         moodRadioGroup = findViewById(R.id.moodRadioGroup)
         submitButton = findViewById(R.id.submitMoodButton)
 
-        // Set submit button click listener
         submitButton.setOnClickListener {
             val selectedMoodId = moodRadioGroup.checkedRadioButtonId
             val selectedMood = findViewById<RadioButton>(selectedMoodId)?.text.toString()

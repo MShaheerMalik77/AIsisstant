@@ -31,8 +31,7 @@ class SummarizerActivity : AppCompatActivity() {
             val summaryText = bulletPoints.joinToString("\n• ", prefix = "• ")
 
             result.text = summaryText
-
-            // Save to Firebase
+            
             val currentUser = auth.currentUser
             if (currentUser != null) {
                 val userId = currentUser.uid
@@ -45,7 +44,6 @@ class SummarizerActivity : AppCompatActivity() {
                 database.child("users").child(userId).child("summaries").child(summaryId).setValue(summaryData)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Summary saved! 📄", Toast.LENGTH_SHORT).show()
-                        // Refresh summaries
                         loadSummaries()
                     }
                     .addOnFailureListener {

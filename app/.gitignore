@@ -1,1 +1,11 @@
-/build
+
+app/src/main/assets/*.onnx
+app/src/main/assets/tokenizer_config.json
+app/src/main/assets/special_tokens_map.json
+app/src/main/assets/vocab.txt
+app/src/main/assets/tokenizer.json
+app/src/main/assets/id2label.json
+
+
+app/src/main/assets/*
+!app/src/main/assets/.gitkeep
